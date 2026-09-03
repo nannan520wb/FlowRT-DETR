@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments and editors
+.venv/
+venv/
+.env
+.env.*
+.idea/
+.vscode/
+*.swp
+
+# Data, outputs, and experiment tracking
+data/
+dataset/
+output/
+outputs/
+runs/
+wandb/
+logs/
+*.log
+
+# Model and generated artifacts
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.engine
+*.npy
+*.npz
+infer_result.*
+optical_flow/weights/*
+!optical_flow/weights/README.md
+
+# OS metadata
+.DS_Store
+Thumbs.db
