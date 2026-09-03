@@ -1,0 +1,33 @@
+train_dataloader:
+  dataset:
+    transforms:
+      ops:
+        - type: ComputeOpticalFlow
+          ckpt_path: ./optical_flow/weights/kitti-S.pth
+          config_path: ./optical_flow/config/kitti-S.json
+          iterations: 12
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBox, min_size: 1}
+        - {type: RandomHorizontalFlip, p: 0.5}
+        - {type: PadToSize, spatial_size: [544, 960], fill: 0}
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: ToImageTensor}
+        - {type: ConvertDtype}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}
+        - {type: SanitizeBoundingBox, min_size: 1}
+        - {type: ConvertBox, out_fmt: cxcywh, normalize: True}
+
+val_dataloader:
+  dataset:
+    transforms:
+      ops:
+        - type: ComputeOpticalFlow
+          ckpt_path: ./optical_flow/weights/kitti-S.pth
+          config_path: ./optical_flow/config/kitti-S.json
+          iterations: 12
+        - {type: PadToSize, spatial_size: [544, 960], fill: 0}
+        - {type: ToImageTensor}
+        - {type: ConvertDtype}
+        - {type: Normalize, mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}
+        - {type: SanitizeBoundingBox, min_size: 1}
+        - {type: ConvertBox, out_fmt: cxcywh, normalize: True}

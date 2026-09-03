@@ -1,0 +1,9 @@
+__include__: [
+  '../dataset/uadetrac_detection.yml',
+  '../runtime.yml',
+  './include/model.yml',
+  './include/dataloader.yml',
+  './include/optimizer.yml',
+]
+
+output_dir: ./output/flowrtdetr_r18_uadetrac

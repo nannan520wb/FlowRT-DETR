@@ -1,0 +1,72 @@
+task: detection
+
+model: FlowRTDETR
+criterion: SetCriterion
+postprocessor: RTDETRPostProcessor
+
+FlowRTDETR:
+  backbone: PResNet
+  encoder: HybridEncoder
+  decoder: RTDETRTransformer
+  multi_scale: [480, 512, 544, 544, 544, 576, 608, 640, 672, 704, 736]
+  fuse_s3: True
+  fuse_s4: False
+  fuse_s5: False
+  flow_fusion_mode: asg
+  asg_max_gate: 0.2
+  asg_motion_thr: 0.5
+  asg_motion_temp: 0.25
+  asg_sim_thr: 0.0
+  asg_sim_temp: 0.1
+
+PResNet:
+  depth: 18
+  variant: d
+  freeze_at: -1
+  return_idx: [1, 2, 3]
+  num_stages: 4
+  freeze_norm: False
+  pretrained: True
+
+HybridEncoder:
+  in_channels: [128, 256, 512]
+  feat_strides: [8, 16, 32]
+  hidden_dim: 256
+  use_encoder_idx: [2]
+  num_encoder_layers: 1
+  nhead: 8
+  dim_feedforward: 1024
+  dropout: 0.0
+  enc_act: gelu
+  pe_temperature: 10000
+  expansion: 0.5
+  depth_mult: 1
+  act: silu
+  eval_spatial_size: [544, 960]
+
+RTDETRTransformer:
+  feat_channels: [256, 256, 256]
+  feat_strides: [8, 16, 32]
+  hidden_dim: 256
+  num_levels: 3
+  num_queries: 300
+  num_decoder_layers: 3
+  num_denoising: 100
+  eval_idx: -1
+  eval_spatial_size: [544, 960]
+
+use_focal_loss: True
+
+RTDETRPostProcessor:
+  num_top_queries: 300
+
+SetCriterion:
+  weight_dict: {loss_vfl: 1, loss_bbox: 5, loss_giou: 5}
+  losses: [vfl, boxes]
+  alpha: 0.75
+  gamma: 2.0
+  matcher:
+    type: HungarianMatcher
+    weight_dict: {cost_class: 2, cost_bbox: 5, cost_giou: 5}
+    alpha: 0.25
+    gamma: 2.0

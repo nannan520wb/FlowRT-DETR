@@ -1,0 +1,11 @@
+# Install PyTorch 2.0.1 and torchvision 0.15.2 separately for your CUDA build.
+h5py>=3.8,<4
+matplotlib>=3.7,<4
+numpy>=1.23,<2
+opencv-python-headless>=4.8,<5
+packaging>=23,<26
+Pillow>=9.5,<11
+pycocotools==2.0.7
+PyYAML>=6,<7
+scipy>=1.10,<2
+transformers>=4.30,<5

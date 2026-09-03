@@ -1,0 +1,13 @@
+FlowRT-DETR
+Copyright 2026 Wenting Wang and Bo Wang
+
+This product includes software developed by the RT-DETR contributors and
+software derived from the DETR reference implementation. RT-DETR is licensed
+under the Apache License, Version 2.0.
+
+The optical_flow directory contains code derived from SEA-RAFT, developed by
+the Princeton Vision & Learning Lab and licensed under the BSD 3-Clause
+License. The original license is reproduced in third_party/SEA-RAFT-LICENSE.
+
+The figures in docs/assets are reproduced from the FlowRT-DETR manuscript by
+Wenting Wang and Bo Wang. They remain copyright their authors.
